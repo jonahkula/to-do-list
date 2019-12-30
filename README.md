@@ -26,5 +26,5 @@ Edit     - edit an item in the list
 
 Sort     - sort the list in alphabetical order
 
-Clear    - clear all item from the list\n
+Clear    - clear all item from the list\
 Finish   - write finished list to text file and exit program
