@@ -1,4 +1,4 @@
-TO DO LIST - Jonah Kulakofsky
+TO DO LIST - Jonah Kulakofsky\
 Created on December 30, 2019
 
 Implements a doubly linked list to maintain a to do list.\
