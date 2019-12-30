@@ -68,7 +68,7 @@ int length(List L)
     return (L->length);
 }
 
-int index1(List L)
+int cursorIndex(List L)
 {
     if (L == NULL)
     {
@@ -371,9 +371,14 @@ void delete (List L)
     L->cursorIndex = -1;
 }
 
-void set(List L, char *data)
+void edit(List L, char *data)
 {
     L->cursor->data = data;
+}
+
+void sortList(List L)
+{
+    // TBD
 }
 
 void printList(FILE *out, List L)

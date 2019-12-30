@@ -8,7 +8,7 @@ int main(int argc, char *argv[])
     int userInput;
     printf("(1) - start list from scratch\n(2) - start from text file\n\nInput: ");
     scanf("%d", &userInput);
-    printf("%d",userInput);
+    printf("\n");
     // if (argc != 3)
     // {
     //     fprintf(stderr, "Usage: %s <input file> <output file>\n", argv[0]);
