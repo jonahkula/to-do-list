@@ -3,11 +3,9 @@
 #include "List.h"
 #include "string.h"
 
-#define MAX_LEN 256
-
 struct NodeObj
 {
-    char data[MAX_LEN];
+    char *data;
     struct NodeObj *next;
     struct NodeObj *prev;
 } NodeObj;
@@ -23,7 +21,7 @@ struct ListObj
     int cursorIndex;
 } ListObj;
 
-Node newNode(int data)
+Node newNode(char *data)
 {
     Node N = malloc(sizeof(NodeObj));
     N->data = data;
@@ -70,7 +68,7 @@ int length(List L)
     return (L->length);
 }
 
-int index(List L)
+int index1(List L)
 {
     if (L == NULL)
     {
@@ -80,7 +78,7 @@ int index(List L)
     return (L->cursorIndex);
 }
 
-int front(List L)
+char *front(List L)
 {
     if (L == NULL)
     {
@@ -90,7 +88,7 @@ int front(List L)
     return (L->front->data);
 }
 
-int back(List L)
+char *back(List L)
 {
     if (L == NULL)
     {
@@ -100,7 +98,7 @@ int back(List L)
     return (L->back->data);
 }
 
-int get(List L)
+char *get(List L)
 {
     if (L == NULL)
     {
@@ -200,7 +198,7 @@ void moveNext(List L)
     L->cursorIndex++;
 }
 
-void prepend(List L, int data)
+void prepend(List L, char *data)
 {
     Node N = newNode(data);
     if (L == NULL)
@@ -222,7 +220,7 @@ void prepend(List L, int data)
     L->length++;
 }
 
-void append(List L, int data)
+void append(List L, char *data)
 {
     Node N = newNode(data);
     if (L == NULL)
@@ -242,7 +240,7 @@ void append(List L, int data)
     L->length++;
 }
 
-void insertBefore(List L, int data)
+void insertBefore(List L, char *data)
 {
     Node N = newNode(data);
     if (L == NULL)
@@ -266,7 +264,7 @@ void insertBefore(List L, int data)
     L->cursorIndex++;
 }
 
-void insertAfter(List L, int data)
+void insertAfter(List L, char *data)
 {
     Node N = newNode(data);
     if (L == NULL)
@@ -373,9 +371,9 @@ void delete (List L)
     L->cursorIndex = -1;
 }
 
-void set(List L, int x)
+void set(List L, char *data)
 {
-    L->cursor->data = x;
+    L->cursor->data = data;
 }
 
 void printList(FILE *out, List L)
@@ -389,7 +387,7 @@ void printList(FILE *out, List L)
     N = L->front;
     while (N != NULL)
     {
-        fprintf(out, "%d ", N->data);
+        fprintf(out, "%s ", N->data);
         N = N->next;
     }
 }
