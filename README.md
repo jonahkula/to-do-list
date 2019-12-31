@@ -1,5 +1,6 @@
-TO DO LIST - Jonah Kulakofsky\
-Created on December 30, 2019
+TO DO LIST
+
+Created on December 30, 2019 by Jonah Kulakofsky
 
 Implements a doubly linked list to maintain a to do list.\
 You can either start from scratch or read in a text file.\
