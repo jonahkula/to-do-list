@@ -356,7 +356,23 @@ void sortList(List L)
 {
     testNull(L);
     testEmpty(L);
-    // TBD
+    char *temp = "";
+    Node N = L->front;
+    Node M = NULL;
+    while (N != NULL)
+    {
+        M = N->next;
+        while (M != NULL)
+        {
+            if (strcmp(N->data, M->data) > 0)
+            {
+                strcpy(temp, N->data);
+                strcpy(N->data, M->data);
+                strcpy(M->data, temp);
+            }
+        }
+        N = N->next;
+    }
 }
 
 void printList(FILE *out, List L)
