@@ -65,7 +65,10 @@ void startProgram(FILE *in, FILE *out)
 void readFile(FILE *in, FILE *out)
 {
     List toDoList = newList();
-    // TBD
+    char str[1000];
+    rewind(in);
+    while (fgets(str, sizeof str, in) != NULL)
+        append(toDoList, str);
     fclose(in);
     printList(stdout, toDoList);
     printf("\n");
@@ -88,7 +91,7 @@ void finishProgram(FILE *out, List toDoList)
 }
 
 /*
-read in file
+fix reading bug, overwriting everytime you append
 write add, delete, edit, sort, print, and clear in listOptions()
 add exception handling to listOptions()
 test code and fix bugs

@@ -386,7 +386,7 @@ void printList(FILE *out, List L)
         int count = 1;
         while (N != NULL)
         {
-            fprintf(out, "%d. %s\n", count, N->data);
+            fprintf(out, "%d. %s", count, N->data);
             count++;
             N = N->next;
         }
