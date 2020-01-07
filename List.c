@@ -355,7 +355,8 @@ void edit(List L, char *data)
 void sortList(List L)
 {
     testNull(L);
-    testEmpty(L);
+    if (L->length == 0)
+        return;
     char *temp = "";
     Node N = L->front;
     Node M = NULL;

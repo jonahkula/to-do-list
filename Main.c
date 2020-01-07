@@ -77,13 +77,58 @@ void readFile(FILE *in, FILE *out)
 
 void listOptions(FILE *out, List toDoList)
 {
-    // TBD
-    finishProgram(out, toDoList);
+    int userInput;
+    printf("(1) - add\n(2) - delete\n(3) - edit\n(4) - sort\n(5) - print\n(6) - clear\n(7) - finish\n\nInput: ");
+    if (scanf("%d", &userInput) != 1)
+    {
+        printf("\nError: input is not an integer\n");
+        fclose(out);
+        exit(1);
+    }
+    printf("\n");
+    switch (userInput)
+    {
+    case 1:
+        // add
+        listOptions(out, toDoList);
+        break;
+    case 2:
+        // delete
+        listOptions(out, toDoList);
+        break;
+    case 3:
+        // edit
+        listOptions(out, toDoList);
+        break;
+    case 4:
+        sortList(toDoList);
+        printList(stdout, toDoList);
+        printf("\n");
+        listOptions(out, toDoList);
+        break;
+    case 5:
+        printList(stdout, toDoList);
+        printf("\n");
+        listOptions(out, toDoList);
+        break;
+    case 6:
+        clear(toDoList);
+        printList(stdout, toDoList);
+        printf("\n");
+        listOptions(out, toDoList);
+        break;
+    case 7:
+        finishProgram(out, toDoList);
+    default:
+        printf("Error: invalid input, must be 1-7\n\n");
+        listOptions(out, toDoList);
+    }
 }
 
 void finishProgram(FILE *out, List toDoList)
 {
-    printf("Program finished, final list written to text file\n");
+    printf("Program finished, final list written to text file and below:\n\n");
+    printList(stdout, toDoList);
     printList(out, toDoList);
     fclose(out);
     freeList(&toDoList);
@@ -92,7 +137,6 @@ void finishProgram(FILE *out, List toDoList)
 
 /*
 fix reading bug, overwriting everytime you append
-write add, delete, edit, sort, print, and clear in listOptions()
-add exception handling to listOptions()
+write add, delete, and edit in listOptions()
 test code and fix bugs
 */
