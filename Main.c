@@ -82,6 +82,7 @@ void getInput(FILE *out, List toDoList)
     if (scanf("%d", &choice) != 1)
     {
         printf("\nError: input is not an integer\n");
+        freeList(&toDoList);
         fclose(out);
         exit(1);
     }
@@ -92,10 +93,11 @@ void getInput(FILE *out, List toDoList)
 void listOptions(FILE *out, List toDoList, int choice)
 {
     char str[1000];
+    int userInput;
     switch (choice)
     {
     case 1:
-        printf("Enter an item: ");
+        printf("Enter an item to add: ");
         scanf(" %[^\n]", str);
         strncat(str, "\n", 1);
         append(toDoList, str);
@@ -105,15 +107,51 @@ void listOptions(FILE *out, List toDoList, int choice)
         getInput(out, toDoList);
         break;
     case 2:
-        // delete
+        printf("Enter item number to delete: ");
+        if (scanf("%d", &userInput) != 1)
+        {
+            printf("\nError: input is not an integer\n");
+            freeList(&toDoList);
+            fclose(out);
+            exit(1);
+        }
+        printf("\n");
+        if (find(toDoList, userInput) == 0)
+        {
+            printf("Error: item number does not exist\n\n");
+            getInput(out, toDoList);
+        }
+        delete (toDoList);
+        printList(stdout, toDoList);
+        printf("\n");
         getInput(out, toDoList);
         break;
     case 3:
-        // edit
+        printf("Enter item number to edit: ");
+        if (scanf("%d", &userInput) != 1)
+        {
+            printf("\nError: input is not an integer\n");
+            freeList(&toDoList);
+            fclose(out);
+            exit(1);
+        }
+        printf("\n");
+        if (find(toDoList, userInput) == 0)
+        {
+            printf("Error: item number does not exist\n\n");
+            getInput(out, toDoList);
+        }
+        printf("Enter new item: ");
+        scanf(" %[^\n]", str);
+        strncat(str, "\n", 1);
+        edit(toDoList, str);
+        printf("\n");
+        printList(stdout, toDoList);
+        printf("\n");
         getInput(out, toDoList);
         break;
     case 4:
-        sortList(toDoList);
+        sortList(toDoList); // bus bug here
         printList(stdout, toDoList);
         printf("\n");
         getInput(out, toDoList);
@@ -148,7 +186,6 @@ void finishProgram(FILE *out, List toDoList)
 }
 
 /*
-fix reading bug, overwriting everytime you append
-write delete and edit in listOptions()
-test code and fix bugs
+fix reading bug in readFile(), overwriting everytime you append
+fix bus bug in sortList(), accessing memory that doesn't exist
 */

@@ -12,6 +12,7 @@ char *front(List L);                   // returns front element of L
 char *back(List L);                    // returns back element of L
 char *get(List L);                     // returns cursor element of L
 int equals(List A, List B);            // returns (1) if A and B are equal and (0) otherwise
+int find(List L, int userInput);       // returns (1) if input is in list and (0) otherwise
 void clear(List L);                    // resets L to empty state
 void moveFront(List L);                // set cursor to front element
 void moveBack(List L);                 // set cursor to back element

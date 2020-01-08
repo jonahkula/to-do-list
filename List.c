@@ -134,6 +134,22 @@ int equals(List A, List B)
     return eq;
 }
 
+int find(List L, int userInput)
+{
+    if (userInput <= 0 || userInput > L->length)
+        return 0;
+    int count = 1;
+    Node N = L->front;
+    while (N != NULL && count != userInput)
+    {
+        count++;
+        N = N->next;
+    }
+    L->cursor = N;
+    L->cursorIndex = count - 1;
+    return 1;
+}
+
 void clear(List L)
 {
     testNull(L);
@@ -371,6 +387,7 @@ void sortList(List L)
                 strcpy(N->data, M->data);
                 strcpy(M->data, temp);
             }
+            M = M->next;
         }
         N = N->next;
     }
