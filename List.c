@@ -373,7 +373,6 @@ void sortList(List L)
     testNull(L);
     if (L->length == 0)
         return;
-    char *temp = "";
     Node N = L->front;
     Node M = NULL;
     while (N != NULL)
@@ -383,9 +382,11 @@ void sortList(List L)
         {
             if (strcmp(N->data, M->data) > 0)
             {
+                char *temp = malloc(strlen(N->data) + 1);
                 strcpy(temp, N->data);
                 strcpy(N->data, M->data);
                 strcpy(M->data, temp);
+                free(temp);
             }
             M = M->next;
         }

@@ -96,7 +96,7 @@ void listOptions(FILE *out, List toDoList, int choice)
     int userInput;
     switch (choice)
     {
-    case 1:
+    case 1: // add
         printf("Enter an item to add: ");
         scanf(" %[^\n]", str);
         strncat(str, "\n", 1);
@@ -106,7 +106,7 @@ void listOptions(FILE *out, List toDoList, int choice)
         printf("\n");
         getInput(out, toDoList);
         break;
-    case 2:
+    case 2: // delete
         printf("Enter item number to delete: ");
         if (scanf("%d", &userInput) != 1)
         {
@@ -126,7 +126,7 @@ void listOptions(FILE *out, List toDoList, int choice)
         printf("\n");
         getInput(out, toDoList);
         break;
-    case 3:
+    case 3: // edit
         printf("Enter item number to edit: ");
         if (scanf("%d", &userInput) != 1)
         {
@@ -150,24 +150,24 @@ void listOptions(FILE *out, List toDoList, int choice)
         printf("\n");
         getInput(out, toDoList);
         break;
-    case 4:
-        sortList(toDoList); // bus bug here
+    case 4: // sort
+        sortList(toDoList);
         printList(stdout, toDoList);
         printf("\n");
         getInput(out, toDoList);
         break;
-    case 5:
+    case 5: // print
         printList(stdout, toDoList);
         printf("\n");
         getInput(out, toDoList);
         break;
-    case 6:
+    case 6: // clear
         clear(toDoList);
         printList(stdout, toDoList);
         printf("\n");
         getInput(out, toDoList);
         break;
-    case 7:
+    case 7: // finish
         finishProgram(out, toDoList);
     default:
         printf("Error: invalid input, must be 1-7\n\n");
@@ -187,5 +187,4 @@ void finishProgram(FILE *out, List toDoList)
 
 /*
 fix reading bug in readFile(), overwriting everytime you append
-fix bus bug in sortList(), accessing memory that doesn't exist
 */
