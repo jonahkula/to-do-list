@@ -3,76 +3,29 @@
 #include <string.h>
 #include "List.h"
 
-void startProgram(FILE *in, FILE *out);
-void readFile(FILE *in, FILE *out);
 void getInput(FILE *out, List toDoList);
 void listOptions(FILE *out, List toDoList, int choice);
 void finishProgram(FILE *out, List toDoList);
 
 int main(int argc, char *argv[])
 {
-    FILE *in, *out;
-    if (argc != 3)
+    FILE *out;
+    if (argc != 2)
     {
-        fprintf(stderr, "Usage: %s <input file> <output file>\n", argv[0]);
+        fprintf(stderr, "Usage: %s <output file>\n", argv[0]);
         exit(1);
     }
-    in = fopen(argv[1], "r");
-    out = fopen(argv[2], "w");
-    if (in == NULL)
-    {
-        printf("Unable to open file %s for reading\n", argv[1]);
-        exit(1);
-    }
+    out = fopen(argv[1], "w");
     if (out == NULL)
     {
         printf("Unable to open file %s for writing\n", argv[2]);
         exit(1);
     }
-    startProgram(in, out);
-    return 0;
-}
-
-void startProgram(FILE *in, FILE *out)
-{
-    int userInput;
-    printf("(1) - start list from scratch\n(2) - start from text file\n\nInput: ");
-    if (scanf("%d", &userInput) != 1)
-    {
-        printf("\nError: input is not an integer\n");
-        fclose(in);
-        fclose(out);
-        exit(1);
-    }
-    printf("\n");
-    if (userInput == 1)
-    {
-        fclose(in);
-        List toDoList = newList();
-        printList(stdout, toDoList);
-        printf("\n");
-        getInput(out, toDoList);
-    }
-    else if (userInput == 2)
-        readFile(in, out);
-    else
-    {
-        printf("Error: invalid input, must be 1 or 2\n\n");
-        startProgram(in, out);
-    }
-}
-
-void readFile(FILE *in, FILE *out)
-{
     List toDoList = newList();
-    char str[1000];
-    rewind(in);
-    while (fgets(str, sizeof str, in) != NULL) // overwriting bug here
-        append(toDoList, str);
-    fclose(in);
     printList(stdout, toDoList);
     printf("\n");
     getInput(out, toDoList);
+    return 0;
 }
 
 void getInput(FILE *out, List toDoList)
@@ -96,7 +49,8 @@ void listOptions(FILE *out, List toDoList, int choice)
     int userInput;
     switch (choice)
     {
-    case 1: // add
+    case 1:
+        // add
         printf("Enter an item to add: ");
         scanf(" %[^\n]", str);
         strncat(str, "\n", 1);
@@ -106,7 +60,8 @@ void listOptions(FILE *out, List toDoList, int choice)
         printf("\n");
         getInput(out, toDoList);
         break;
-    case 2: // delete
+    case 2:
+        // delete
         printf("Enter item number to delete: ");
         if (scanf("%d", &userInput) != 1)
         {
@@ -126,7 +81,8 @@ void listOptions(FILE *out, List toDoList, int choice)
         printf("\n");
         getInput(out, toDoList);
         break;
-    case 3: // edit
+    case 3:
+        // edit
         printf("Enter item number to edit: ");
         if (scanf("%d", &userInput) != 1)
         {
@@ -150,24 +106,28 @@ void listOptions(FILE *out, List toDoList, int choice)
         printf("\n");
         getInput(out, toDoList);
         break;
-    case 4: // sort
+    case 4:
+        // sort
         sortList(toDoList);
         printList(stdout, toDoList);
         printf("\n");
         getInput(out, toDoList);
         break;
-    case 5: // print
+    case 5:
+        // print
         printList(stdout, toDoList);
         printf("\n");
         getInput(out, toDoList);
         break;
-    case 6: // clear
+    case 6:
+        // clear
         clear(toDoList);
         printList(stdout, toDoList);
         printf("\n");
         getInput(out, toDoList);
         break;
-    case 7: // finish
+    case 7:
+        // finish
         finishProgram(out, toDoList);
     default:
         printf("Error: invalid input, must be 1-7\n\n");
@@ -184,7 +144,3 @@ void finishProgram(FILE *out, List toDoList)
     freeList(&toDoList);
     exit(0);
 }
-
-/*
-fix reading bug in readFile(), overwriting everytime you append
-*/

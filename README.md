@@ -1,15 +1,9 @@
-TO DO LIST
+TO-DO LIST
 
 Created on December 30, 2019 by Jonah Kulakofsky
 
-Implements a doubly linked list to maintain a to do list.\
-You can either start from scratch or read in a text file.\
+Implements and demonstrates a doubly linked list to maintain a to-do list.\
 Finished list will be written to a text file. 
-
-If reading in a text file list use format:\
-Example sentence 1\
-Example sentence 2\
-etc...
 
 List manipulations:\
 Add      - append an item to the list\
